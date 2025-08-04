@@ -19,8 +19,7 @@ ADAPTERFILE=/scratch_vol0/fungi/PaleoENV_cluster/99_softwares/adapters_sequences
 # Arguments :
 # ILLUMINACLIP:"$ADAPTERFILE":2:30:10 LEADING:30 TRAILING:30 SLIDINGWINDOW:26:30 MINLEN:150
 
-module load conda/4.12.0
-source ~/.bashrc
+eval "$(conda shell.bash hook)"
 conda activate trimmomatic
 
 cd $WORKING_DIRECTORY
@@ -57,8 +56,7 @@ ADAPTERFILE=/scratch_vol0/fungi/PaleoENV_cluster/99_softwares/adapters_sequences
 # Arguments :
 # ILLUMINACLIP:"$ADAPTERFILE":2:30:10 LEADING:30 TRAILING:30 SLIDINGWINDOW:26:30 MINLEN:150
 
-module load conda/4.12.0
-source ~/.bashrc
+eval "$(conda shell.bash hook)"
 conda activate trimmomatic
 
 cd $WORKING_DIRECTORY
