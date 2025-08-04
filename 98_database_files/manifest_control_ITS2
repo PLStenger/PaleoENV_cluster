@@ -1,3 +1,3 @@
 sample-id	forward-absolute-filepath	reverse-absolute-filepath
-H2O	/home/plstenge/PaleoENV/03_cleaned_data/ITS2/ITS2-H2O_ATGGAGA-TTCGAGC-LHH7B_L001_R1.fastq.gz	/home/plstenge/PaleoENV/03_cleaned_data/ITS2/ITS2-H2O_ATGGAGA-TTCGAGC-LHH7B_L001_R2.fastq.gz
-Neg	/home/plstenge/PaleoENV/03_cleaned_data/ITS2/ITS2-neg3_ATGGAGA-CATCGAG-LHH7B_L001_R1.fastq.gz	/home/plstenge/PaleoENV/03_cleaned_data/ITS2/ITS2-neg3_ATGGAGA-CATCGAG-LHH7B_L001_R2.fastq.gz
+H2O	/scratch_vol0/fungi/PaleoENV_cluster/03_cleaned_data/ITS2/ITS2-H2O_ATGGAGA-TTCGAGC-LHH7B_L001_R1.fastq.gz	/scratch_vol0/fungi/PaleoENV_cluster/03_cleaned_data/ITS2/ITS2-H2O_ATGGAGA-TTCGAGC-LHH7B_L001_R2.fastq.gz
+Neg	/scratch_vol0/fungi/PaleoENV_cluster/03_cleaned_data/ITS2/ITS2-neg3_ATGGAGA-CATCGAG-LHH7B_L001_R1.fastq.gz	/scratch_vol0/fungi/PaleoENV_cluster/03_cleaned_data/ITS2/ITS2-neg3_ATGGAGA-CATCGAG-LHH7B_L001_R2.fastq.gz
