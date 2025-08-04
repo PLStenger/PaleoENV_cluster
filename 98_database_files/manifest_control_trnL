@@ -1,0 +1,5 @@
+sample-id	forward-absolute-filepath	reverse-absolute-filepath
+H2O	/home/plstenge/PaleoENV/03_cleaned_data/trnL/trnLgh-H2O_ATGGAGA-TCTCCAT-LHH7B_L001_R1.fastq.gz	/home/plstenge/PaleoENV/03_cleaned_data/trnL/trnLgh-H2O_ATGGAGA-TCTCCAT-LHH7B_L001_R2.fastq.gz
+Neg1	/home/plstenge/PaleoENV/03_cleaned_data/trnL/trnLgh-neg1_ATGGAGA-ACCTAGG-LHH7B_L001_R1.fastq.gz	/home/plstenge/PaleoENV/03_cleaned_data/trnL/trnLgh-neg1_ATGGAGA-ACCTAGG-LHH7B_L001_R2.fastq.gz
+Neg2	/home/plstenge/PaleoENV/03_cleaned_data/trnL/trnLgh-neg2_ATGGAGA-TTGATCC-LHH7B_L001_R1.fastq.gz	/home/plstenge/PaleoENV/03_cleaned_data/trnL/trnLgh-neg2_ATGGAGA-TTGATCC-LHH7B_L001_R2.fastq.gz
+Neg3	/home/plstenge/PaleoENV/03_cleaned_data/trnL/trnLgh-neg3_ATGGAGA-ATCTTGC-LHH7B_L001_R1.fastq.gz	/home/plstenge/PaleoENV/03_cleaned_data/trnL/trnLgh-neg3_ATGGAGA-ATCTTGC-LHH7B_L001_R2.fastq.gz
