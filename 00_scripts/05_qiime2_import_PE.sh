@@ -1,8 +1,7 @@
 #!/bin/bash
 
 
-module load conda/4.12.0
-source ~/.bashrc
+eval "$(conda shell.bash hook)"
 conda activate qiime2-amplicon-2024.10
 
 ############################################################################################################################################
