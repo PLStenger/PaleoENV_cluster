@@ -16,8 +16,7 @@ OUTPUT=/scratch_vol0/fungi/PaleoENV_cluster/02_quality_check/trnL
 # Make the directory (mkdir) only if not existe already(-p)
 mkdir -p $OUTPUT
 
-module load conda/4.12.0
-source ~/.bashrc
+eval "$(conda shell.bash hook)"
 conda activate fastqc
 
 cd $WORKING_DIRECTORY
@@ -45,8 +44,7 @@ OUTPUT=/scratch_vol0/fungi/PaleoENV_cluster/02_quality_check/ITS2
 # Make the directory (mkdir) only if not existe already(-p)
 mkdir -p $OUTPUT
 
-module load conda/4.12.0
-source ~/.bashrc
+eval "$(conda shell.bash hook)"
 conda activate fastqc
 
 cd $WORKING_DIRECTORY
