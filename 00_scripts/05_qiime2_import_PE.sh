@@ -1,9 +1,6 @@
 #!/bin/bash
 
 
-eval "$(conda shell.bash hook)"
-conda activate qiime2-amplicon-2024.10
-
 ############################################################################################################################################
 # trnL
 ############################################################################################################################################
@@ -22,6 +19,9 @@ MANIFEST=/scratch_vol0/fungi/PaleoENV_cluster/98_database_files/manifest_trnL
 MANIFEST_control_samples=/scratch_vol0/fungi/PaleoENV_cluster/98_database_files/manifest_control_trnL
 
 TMPDIR=/home/plstenge
+
+eval "$(conda shell.bash hook)"
+conda activate qiime2-2021.4
 
 ###############################################################
 ### For importing your data in a Qiime2 format
