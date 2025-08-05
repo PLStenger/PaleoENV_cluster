@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# - RepSeq.qza : Contient les séquences représentatives (ASVs) obtenues après le traitement DADA2 des échantillons (demux.qza). Ce sont les séquences uniques déduites des données brutes après correction d'erreurs, fusion des paires et filtrage de chimères.
+# - RepSeq_neg.qza : Contient les séquences représentatives issues exclusivement des contrôles négatifs (demux_neg.qza), représentant donc les possibles contaminants.
+# - HitNegCtrl.qza : Résultat de la commande quality-control exclude-seqs où sont listées les séquences de RepSeq.qza qui correspondent à 100% à des séquences présentes dans RepSeq_neg.qza, c’est-à-dire les séquences d’échantillons qui ont aussi été détectées dans les contrôles négatifs (contaminants potentiels).
+# - NegRepSeq.qza : Contient les séquences de RepSeq.qza qui n’ont pas été trouvées dans RepSeq_neg.qza (séquences d’échantillons exclues des contaminants).
+# - NegTable.qza : Table des fréquences des séquences des échantillons filtrées pour retirer les séquences listées dans HitNegCtrl.qza (les contaminations identifiées).
+# - ConTable.qza : Table des fréquences obtenue après filtrage supplémentaire sur NegTable.qza pour ne garder que les séquences présentes dans au moins 2 échantillons (min_samples=2) afin de renforcer la robustesse.
+# - ConRepSeq.qza : Séquences représentatives correspondant aux ASVs présentes dans ConTable.qza, c’est-à-dire les séquences propres finale après élimination des contaminations et filtrage sur occurrence.
 
 ############################################################################################################################################
 # trnL
