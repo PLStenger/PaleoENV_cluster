@@ -7,7 +7,7 @@
 
 
 WORKING_DIRECTORY=/scratch_vol0/fungi/PaleoENV_cluster/05_QIIME2/ITS2
-OUTPUT=/scratch_vol0/fungi/PaleoENV_cluster/05_QIIME2/visual/ITS2
+OUTPUT=/scratch_vol0/fungi/PaleoENV_cluster/05_QIIME2/ITS2/visual
 
 DATABASE=/scratch_vol0/fungi/PaleoENV_cluster/98_database_files
 TMPDIR=/scratch_vol0
@@ -23,14 +23,6 @@ TMPDIR=/scratch_vol0
 
 # https://docs.qiime2.org/2019.10/tutorials/feature-classifier/
 
-
-# Aim: Import data to create a new QIIME 2 Artifact
-# https://gitlab.com/IAC_SolVeg/CNRT_BIOINDIC/-/blob/master/snk/12_qiime2_taxonomy
-
-
-###############################################################
-### For Bacteria
-###############################################################
 
 cd $WORKING_DIRECTORY
 
