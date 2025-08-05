@@ -42,19 +42,11 @@ mkdir -p taxonomy/ITS2
 mkdir -p export/taxonomy/ITS2
 
 
-qiime rescript get-ncbi-data \
-    --p-query '(ITS2[ALL] OR Its2[ALL] OR its2[ALL] NOT bacteria[ORGN] NOT fungi[ORGN]))' \
-    --o-sequences taxonomy/RefTaxo.qza \
-    --o-taxonomy taxonomy/DataSeq.qza
+#qiime rescript get-ncbi-data \
+#    --p-query '(ITS2[ALL] OR Its2[ALL] OR its2[ALL] NOT bacteria[ORGN] NOT fungi[ORGN]))' \
+#    --o-sequences taxonomy/RefTaxo.qza \
+#    --o-taxonomy taxonomy/DataSeq.qza
 
-
-#qiime feature-classifier classify-consensus-blast \
-#  --i-query core/RepSeq.qza \
-#  --i-reference-reads taxonomy/RefTaxo.qza \
-#  --i-reference-taxonomy taxonomy/DataSeq.qza \
-#  --p-perc-identity 0.70 \
-#  --o-classification taxonomy/taxonomy_reads-per-batch_RepSeq.qza \
-#  --verbose
 
 qiime feature-classifier classify-consensus-vsearch \
     --i-query core/RepSeq.qza  \
@@ -67,7 +59,8 @@ qiime feature-classifier classify-consensus-vsearch \
     --p-strand 'both' \
     --p-unassignable-label 'Unassigned' \
     --p-threads 12 \
-    --o-classification taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch.qza
+    --o-classification taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch.qza \
+    --o-search-results taxonomy/search_results_RepSeq_vsearch.qza
     
 qiime feature-classifier classify-consensus-vsearch \
     --i-query core/RarRepSeq.qza  \
@@ -80,7 +73,8 @@ qiime feature-classifier classify-consensus-vsearch \
     --p-strand 'both' \
     --p-unassignable-label 'Unassigned' \
     --p-threads 12 \
-    --o-classification taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch.qza
+    --o-classification taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch.qza \
+    --o-search-results taxonomy/search_results__RarRepSeq_vsearch.qza
 
   qiime metadata tabulate \
   --m-input-file taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch.qza \
