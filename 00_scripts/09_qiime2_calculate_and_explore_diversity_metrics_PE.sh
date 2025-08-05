@@ -1,8 +1,7 @@
 #!/bin/bash
 
-
-WORKING_DIRECTORY=/scratch_vol0/fungi/PaleoENV_cluster/05_QIIME2
-OUTPUT=/scratch_vol0/fungi/PaleoENV_cluster/05_QIIME2/visual
+WORKING_DIRECTORY=/scratch_vol0/fungi/PaleoENV_cluster/05_QIIME2/ITS2
+OUTPUT=/scratch_vol0/fungi/PaleoENV_cluster/05_QIIME2/visual/ITS2
 
 DATABASE=/scratch_vol0/fungi/PaleoENV_cluster/98_database_files
 TMPDIR=/scratch_vol0
@@ -24,7 +23,9 @@ TMPDIR=/scratch_vol0
 cd $WORKING_DIRECTORY
 
 eval "$(conda shell.bash hook)"
-conda activate qiime2-2021.4
+#conda activate qiime2-2021.4
+conda activate /scratch_vol0/fungi/envs/qiime2-amplicon-2024.10
+
 
 # Make the directory (mkdir) only if not existe already(-p)
 mkdir -p pcoa
@@ -44,8 +45,8 @@ echo $TMPDIR
 qiime diversity core-metrics-phylogenetic \
        --i-phylogeny tree/rooted-tree.qza \
        --i-table core/Table.qza \
-       --p-sampling-depth 5237 \
-       --m-metadata-file $DATABASE/sample-metadata.tsv \
+       --p-sampling-depth 2292 \
+       --m-metadata-file $DATABASE/sample-metadata_ITS2.tsv \
        --o-rarefied-table core/RarTable.qza \
        --o-observed-features-vector core/Vector-observed_asv.qza \
        --o-shannon-vector core/Vector-shannon.qza \
