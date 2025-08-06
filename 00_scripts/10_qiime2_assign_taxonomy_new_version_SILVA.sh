@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 ###############################################################
 ### For ITS2
 ###############################################################
@@ -41,9 +40,20 @@ echo $TMPDIR
 mkdir -p taxonomy/ITS2
 mkdir -p export/taxonomy/ITS2
 
+###############################################################################
+# With a currated database:
+# its2.global.2023-01-17.curated.tax.mc.add.fa
+# from https://www.nature.com/articles/s41597-024-02962-5
+
+
+
+
+###############################################################################
+
+ #   --p-query '(ITS2[ALL] OR Its2[ALL] OR its2[ALL] AND viridiplantae[ORGN] NOT bacteria[ORGN] NOT fungi[ORGN] NOT chloroplast[ALL] NOT mitochondrion[ALL]))' \
 
 qiime rescript get-ncbi-data \
-    --p-query '(ITS2[ALL] OR Its2[ALL] OR its2[ALL] NOT bacteria[ORGN] NOT fungi[ORGN] NOT chloroplast[ALL] NOT mitochondrion[ALL]))' \
+    --p-query '(txid33090[ORGN] AND (ITS OR Internal Transcribed Spacer) NOT environmental sample[Title] NOT environmental samples[Title] NOT environmental[Title] NOT uncultured[Title] NOT unclassified[Title] NOT unidentified[Title] NOT unverified[Title])' \
     --o-sequences taxonomy/RefTaxo.qza \
     --o-taxonomy taxonomy/DataSeq.qza
 
@@ -52,8 +62,8 @@ qiime feature-classifier classify-consensus-vsearch \
     --i-query core/RepSeq.qza  \
     --i-reference-reads taxonomy/RefTaxo.qza \
     --i-reference-taxonomy taxonomy/DataSeq.qza \
-    --p-perc-identity 0.85 \
-    --p-query-cov 0.5 \
+    --p-perc-identity 0.8 \
+    --p-query-cov 0.3 \
     --p-top-hits-only \
     --p-maxaccepts 5 \
     --p-strand 'both' \
@@ -67,8 +77,8 @@ qiime feature-classifier classify-consensus-vsearch \
     --i-query core/RarRepSeq.qza  \
     --i-reference-reads taxonomy/RefTaxo.qza \
     --i-reference-taxonomy taxonomy/DataSeq.qza \
-    --p-perc-identity 0.85 \
-    --p-query-cov 0.5 \
+    --p-perc-identity 0.8 \
+    --p-query-cov 0.3 \
     --p-top-hits-only \
     --p-maxaccepts 5 \
     --p-strand 'both' \
