@@ -42,22 +42,23 @@ mkdir -p taxonomy/ITS2
 mkdir -p export/taxonomy/ITS2
 
 
-#qiime rescript get-ncbi-data \
-#    --p-query '(ITS2[ALL] OR Its2[ALL] OR its2[ALL] NOT bacteria[ORGN] NOT fungi[ORGN]))' \
-#    --o-sequences taxonomy/RefTaxo.qza \
-#    --o-taxonomy taxonomy/DataSeq.qza
+qiime rescript get-ncbi-data \
+    --p-query '(ITS2[ALL] OR Its2[ALL] OR its2[ALL] NOT bacteria[ORGN] NOT fungi[ORGN] NOT chloroplast[ALL] NOT mitochondrion[ALL]))' \
+    --o-sequences taxonomy/RefTaxo.qza \
+    --o-taxonomy taxonomy/DataSeq.qza
 
 
 qiime feature-classifier classify-consensus-vsearch \
     --i-query core/RepSeq.qza  \
     --i-reference-reads taxonomy/RefTaxo.qza \
     --i-reference-taxonomy taxonomy/DataSeq.qza \
-    --p-perc-identity 0.77 \
-    --p-query-cov 0.3 \
+    --p-perc-identity 0.85 \
+    --p-query-cov 0.5 \
     --p-top-hits-only \
-    --p-maxaccepts 1 \
+    --p-maxaccepts 5 \
     --p-strand 'both' \
     --p-unassignable-label 'Unassigned' \
+    --p-min-consensus 0.7 \
     --p-threads 12 \
     --o-classification taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch.qza \
     --o-search-results taxonomy/search_results_RepSeq_vsearch.qza
@@ -66,12 +67,13 @@ qiime feature-classifier classify-consensus-vsearch \
     --i-query core/RarRepSeq.qza  \
     --i-reference-reads taxonomy/RefTaxo.qza \
     --i-reference-taxonomy taxonomy/DataSeq.qza \
-    --p-perc-identity 0.77 \
-    --p-query-cov 0.3 \
+    --p-perc-identity 0.85 \
+    --p-query-cov 0.5 \
     --p-top-hits-only \
-    --p-maxaccepts 1 \
+    --p-maxaccepts 5 \
     --p-strand 'both' \
     --p-unassignable-label 'Unassigned' \
+    --p-min-consensus 0.7 \
     --p-threads 12 \
     --o-classification taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch.qza \
     --o-search-results taxonomy/search_results__RarRepSeq_vsearch.qza
@@ -87,14 +89,14 @@ qiime feature-classifier classify-consensus-vsearch \
  qiime taxa barplot \
   --i-table core/RarTable.qza \
   --i-taxonomy taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch.qza \
-  --m-metadata-file $DATABASE/sample-metadata_others_markers_NC.tsv \
+  --m-metadata-file $DATABASE/sample-metadata_ITS2.tsv \
   --o-visualization taxonomy/taxa-bar-plots_reads-per-batch_RarRepSeq_vsearch.qzv 
   
   
    qiime taxa barplot \
   --i-table core/RarTable.qza \
   --i-taxonomy taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch.qza \
-  --m-metadata-file $DATABASE/sample-metadata_others_markers_NC.tsv \
+  --m-metadata-file $DATABASE/sample-metadata_ITS2.tsv \
   --o-visualization taxonomy/taxa-bar-plots_reads-per-batch_RepSeq_vsearch.qzv 
 
 qiime tools export --input-path taxonomy/taxa-bar-plots_reads-per-batch_RarRepSeq_vsearch.qzv --output-path export/taxonomy/taxa-bar-plots_reads-per-batch_RarRepSeq_vsearch
