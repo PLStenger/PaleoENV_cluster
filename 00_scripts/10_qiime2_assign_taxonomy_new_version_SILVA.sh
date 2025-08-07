@@ -68,7 +68,7 @@ qiime feature-classifier classify-sklearn \
   --o-classification core/taxonomy.qza
 
 qiime metadata tabulate --m-input-file core/taxonomy.qza --o-visualization core/taxonomy.qzv
-
+qiime tools export --input-path core/taxonomy.qzv --output-path /scratch_vol0/fungi/PaleoENV_cluster/05_QIIME2/ITS2/export/taxonomy/taxonomy_its2_global_2023-01-17_curated_tax
 
 ###############################################################################
 # With a currated database:
