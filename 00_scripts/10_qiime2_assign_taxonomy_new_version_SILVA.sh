@@ -45,7 +45,7 @@ mkdir -p export/taxonomy/ITS2
 
 # Importer le fasta comme FeatureData[Sequence]
 qiime tools import \
-  --input-path /scratch_vol0/fungi/PaleoENV_cluster/98_database_files/its2.global.2023-01-17.curated.tax.mc.add.UPPER.CLEAN.fa \
+  --input-path /scratch_vol0/fungi/PaleoENV_cluster/98_database_files/its2.global.2023-01-17.curated.tax.mc.add.UPPER.CLEAN.NOEMPTY.fa \
   --output-path ref-seqs.qza \
   --type 'FeatureData[Sequence]'
 
