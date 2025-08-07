@@ -69,6 +69,16 @@ qiime feature-classifier classify-sklearn \
 
 qiime metadata tabulate --m-input-file core/taxonomy.qza --o-visualization core/taxonomy.qzv
 
+
+###############################################################################
+# With a currated database:
+# Plant ITS2 and rbcL reference databases
+# https://figshare.com/articles/online_resource/QIIME2_RefDB_development_zip/17040680?file=56104238
+# Database update - 1st July 2025
+# NCBI_ITS2_Viridiplantae_fasta_file_2025_07_01.fasta/.qza
+# from Duboi et al 2022: https://pmc.ncbi.nlm.nih.gov/articles/PMC9264521/pdf/12863_2022_Article_1067.pdf
+
+
 ###############################################################################
 
 ##  #   --p-query '(ITS2[ALL] OR Its2[ALL] OR its2[ALL] AND viridiplantae[ORGN] NOT bacteria[ORGN] NOT fungi[ORGN] NOT chloroplast[ALL] NOT mitochondrion[ALL]))' \
