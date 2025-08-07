@@ -72,6 +72,7 @@ qiime metadata tabulate --m-input-file core/taxonomy.qza --o-visualization core/
 
 ###############################################################################
 # With a currated database:
+# DB4Q2 workflow
 # Plant ITS2 and rbcL reference databases
 # https://figshare.com/articles/online_resource/QIIME2_RefDB_development_zip/17040680?file=56104238
 # Database update - 1st July 2025
