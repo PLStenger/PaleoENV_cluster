@@ -125,6 +125,10 @@ For install QIIME2, please refer to http://qiime.org/install/install.html
         real	82m44.469s
         user	74m58.003s
         sys	    1m21.506s
+
+    time nohup bash 10_qiime2_assign_taxonomy_new_version_SILVA.sh &> 10_qiime2_assign_taxonomy_new_version_SILVA.out
+
+    
     time nohup bash 11_core_biom_PE.sh &> 11_core_biom_PE.out
     
     Run "12_FunGuild.sh" localy please
