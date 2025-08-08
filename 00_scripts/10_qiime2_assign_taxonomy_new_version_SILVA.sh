@@ -39,36 +39,36 @@ mkdir -p taxonomy/ITS2
 mkdir -p export/taxonomy/ITS2
 
 ###############################################################################
-# With a currated database:
-# its2.global.2023-01-17.curated.tax.mc.add.fa
-# from https://www.nature.com/articles/s41597-024-02962-5
-
-# Importer le fasta comme FeatureData[Sequence]
-qiime tools import \
-  --input-path /scratch_vol0/fungi/PaleoENV_cluster/98_database_files/its2.global.2023-01-17.curated.tax.mc.add.UPPER.CLEAN.NOEMPTY_ok.fa \
-  --output-path ref-seqs.qza \
-  --type 'FeatureData[Sequence]'
-
-# Importer la taxonomie comme FeatureData[Taxonomy]
-qiime tools import \
-  --input-path /scratch_vol0/fungi/PaleoENV_cluster/98_database_files/its2.global.2023-01-17.curated.tax.mc.add.taxo_clean.tsv \
-  --output-path ref-taxonomy.qza \
-  --type 'FeatureData[Taxonomy]' \
-  --input-format HeaderlessTSVTaxonomyFormat
-  
-#  Entraîner le classifieur (Naive Bayes, meilleure robustesse)
-qiime feature-classifier fit-classifier-naive-bayes \
-  --i-reference-reads ref-seqs.qza \
-  --i-reference-taxonomy ref-taxonomy.qza \
-  --o-classifier its2-eu-plants-classifier.qza
-
-qiime feature-classifier classify-sklearn \
-  --i-classifier its2-eu-plants-classifier.qza \
-  --i-reads core/RepSeq.qza \
-  --o-classification core/taxonomy.qza
-
-qiime metadata tabulate --m-input-file core/taxonomy.qza --o-visualization core/taxonomy.qzv
-qiime tools export --input-path core/taxonomy.qzv --output-path /scratch_vol0/fungi/PaleoENV_cluster/05_QIIME2/ITS2/export/taxonomy/taxonomy_its2_global_2023-01-17_curated_tax
+## With a currated database:
+## its2.global.2023-01-17.curated.tax.mc.add.fa
+## from https://www.nature.com/articles/s41597-024-02962-5
+#
+## Importer le fasta comme FeatureData[Sequence]
+#qiime tools import \
+#  --input-path /scratch_vol0/fungi/PaleoENV_cluster/98_database_files/its2.global.2023-01-17.curated.tax.mc.add.UPPER.CLEAN.NOEMPTY_ok.fa \
+#  --output-path ref-seqs.qza \
+#  --type 'FeatureData[Sequence]'
+#
+## Importer la taxonomie comme FeatureData[Taxonomy]
+#qiime tools import \
+#  --input-path /scratch_vol0/fungi/PaleoENV_cluster/98_database_files/its2.global.2023-01-17.curated.tax.mc.add.taxo_clean.tsv \
+#  --output-path ref-taxonomy.qza \
+#  --type 'FeatureData[Taxonomy]' \
+#  --input-format HeaderlessTSVTaxonomyFormat
+#  
+##  Entraîner le classifieur (Naive Bayes, meilleure robustesse)
+#qiime feature-classifier fit-classifier-naive-bayes \
+#  --i-reference-reads ref-seqs.qza \
+#  --i-reference-taxonomy ref-taxonomy.qza \
+#  --o-classifier its2-eu-plants-classifier.qza
+#
+#qiime feature-classifier classify-sklearn \
+#  --i-classifier its2-eu-plants-classifier.qza \
+#  --i-reads core/RepSeq.qza \
+#  --o-classification core/taxonomy.qza
+#
+#qiime metadata tabulate --m-input-file core/taxonomy.qza --o-visualization core/taxonomy.qzv
+#qiime tools export --input-path core/taxonomy.qzv --output-path /scratch_vol0/fungi/PaleoENV_cluster/05_QIIME2/ITS2/export/taxonomy/taxonomy_its2_global_2023-01-17_curated_tax
 
 ###############################################################################
 # With a currated database:
@@ -79,7 +79,23 @@ qiime tools export --input-path core/taxonomy.qzv --output-path /scratch_vol0/fu
 # NCBI_ITS2_Viridiplantae_fasta_file_2025_07_01.fasta/.qza
 # from Duboi et al 2022: https://pmc.ncbi.nlm.nih.gov/articles/PMC9264521/pdf/12863_2022_Article_1067.pdf
 
+qiime feature-classifier classify-sklearn \
+  --i-classifier /scratch_vol0/fungi/PaleoENV_cluster/98_database_files/NCBI_ITS2_Viridiplantae_classifier_2025_07_01.qza \
+  --i-reads core/RepSeq.qza \
+  --o-classification core/taxonomy.qza
 
+qiime metadata tabulate \
+  --m-input-file core/taxonomy.qza \
+  --o-visualization core/taxonomy.qzv
+
+qiime tools export \
+  --input-path core/taxonomy.qzv \
+  --output-path /scratch_vol0/fungi/PaleoENV_cluster/05_QIIME2/ITS2/export/taxonomy/db4q2_taxonomy_2025_07_01
+
+qiime tools export \
+  --input-path NCBI_ITS2_Viridiplantae_taxonomic_lineages_2025_07_01.qza \
+  --output-path /scratch_vol0/fungi/PaleoENV_cluster/05_QIIME2/ITS2/export/taxonomy/DB4Q2_taxonomy_table_export
+  
 ###############################################################################
 
 ##  #   --p-query '(ITS2[ALL] OR Its2[ALL] OR its2[ALL] AND viridiplantae[ORGN] NOT bacteria[ORGN] NOT fungi[ORGN] NOT chloroplast[ALL] NOT mitochondrion[ALL]))' \
