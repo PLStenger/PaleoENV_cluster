@@ -93,7 +93,7 @@ mkdir -p export/taxonomy/ITS2
 qiime feature-classifier fit-classifier-naive-bayes \
   --i-reference-reads core/ref-seqs.qza \
   --i-reference-taxonomy core/ref-taxonomy.qza \
-  --p-feature-ext-n-features 2048 \
+  --p-feat-ext--n-features 2048 \
   --o-classifier core/its2_db4q2_custom_classifier.qza
 
 qiime feature-classifier classify-sklearn \
