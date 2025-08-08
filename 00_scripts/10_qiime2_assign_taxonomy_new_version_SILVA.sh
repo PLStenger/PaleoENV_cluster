@@ -79,8 +79,24 @@ mkdir -p export/taxonomy/ITS2
 # NCBI_ITS2_Viridiplantae_fasta_file_2025_07_01.fasta/.qza
 # from Duboi et al 2022: https://pmc.ncbi.nlm.nih.gov/articles/PMC9264521/pdf/12863_2022_Article_1067.pdf
 
+qiime tools import \
+  --type 'FeatureData[Sequence]' \
+  --input-path /scratch_vol0/fungi/PaleoENV_cluster/98_database_files/NCBI_ITS2_Viridiplantae_fasta_file_2025_07_01.fasta \
+  --output-path core/ref-seqs.qza
+
+qiime tools import \
+  --type 'FeatureData[Taxonomy]' \
+  --input-path /scratch_vol0/fungi/PaleoENV_cluster/98_database_files/NCBI_ITS2_Viridiplantae_taxonomic_lineages_2025_07_01.tsv \
+  --output-path core/ref-taxonomy.qza \
+  --input-format HeaderlessTSVTaxonomyFormat
+
+qiime feature-classifier fit-classifier-naive-bayes \
+  --i-reference-reads core/ref-seqs.qza \
+  --i-reference-taxonomy core/ref-taxonomy.qza \
+  --o-classifier core/its2_db4q2_custom_classifier.qza
+
 qiime feature-classifier classify-sklearn \
-  --i-classifier /scratch_vol0/fungi/PaleoENV_cluster/98_database_files/NCBI_ITS2_Viridiplantae_classifier_2025_07_01.qza \
+  --i-classifier core/its2_db4q2_custom_classifier.qza \
   --i-reads core/RepSeq.qza \
   --o-classification core/taxonomy.qza
 
@@ -91,10 +107,6 @@ qiime metadata tabulate \
 qiime tools export \
   --input-path core/taxonomy.qzv \
   --output-path /scratch_vol0/fungi/PaleoENV_cluster/05_QIIME2/ITS2/export/taxonomy/db4q2_taxonomy_2025_07_01
-
-qiime tools export \
-  --input-path NCBI_ITS2_Viridiplantae_taxonomic_lineages_2025_07_01.qza \
-  --output-path /scratch_vol0/fungi/PaleoENV_cluster/05_QIIME2/ITS2/export/taxonomy/DB4Q2_taxonomy_table_export
   
 ###############################################################################
 
