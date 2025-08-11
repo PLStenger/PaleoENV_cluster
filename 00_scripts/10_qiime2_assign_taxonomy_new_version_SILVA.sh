@@ -124,7 +124,7 @@ mkdir -p export/taxonomy/ITS2
  
 
 qiime rescript get-ncbi-data \
- --p-query '(txid4479[OR country GN] AND (ITS OR country Internal Transcribed Spacer) NOT environmental sample[Title] NOT environmental samples[Title] NOT environmental[Title] NOT uncultured[Title] NOT unclassified[Title] NOT unidentified[Title] NOT unverified[Title] AND (country France OR country Spain OR country Germany OR country Italy OR country Belgium OR country Greece OR country Iceland OR country Lebanon OR country Liechtenstein OR country Luxembourg OR country Russia OR country Slovakia OR country Slovenia OR country Sweden OR country Switzerland OR country Turkmenistan OR country Uzbekistan)' \
+ --p-query '(txid4479[ORGN] AND (ITS OR country Internal Transcribed Spacer) NOT environmental sample[Title] NOT environmental samples[Title] NOT environmental[Title] NOT uncultured[Title] NOT unclassified[Title] NOT unidentified[Title] NOT unverified[Title] AND (country France OR country Spain OR country Germany OR country Italy OR country Belgium OR country Greece OR country Iceland OR country Lebanon OR country Liechtenstein OR country Luxembourg OR country Russia OR country Slovakia OR country Slovenia OR country Sweden OR country Switzerland OR country Turkmenistan OR country Uzbekistan)' \
     --o-sequences taxonomy/RefTaxo.qza \
     --o-taxonomy taxonomy/DataSeq.qza    
 
