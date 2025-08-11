@@ -90,91 +90,93 @@ mkdir -p export/taxonomy/ITS2
 #  --output-path core/ref-taxonomy.qza \
 #  --input-format HeaderlessTSVTaxonomyFormat
 
-qiime feature-classifier fit-classifier-naive-bayes \
-  --i-reference-reads core/ref-seqs.qza \
-  --i-reference-taxonomy core/ref-taxonomy.qza \
-  --p-feat-ext--n-features 2048 \
-  --o-classifier core/its2_db4q2_custom_classifier.qza
-
-qiime feature-classifier classify-sklearn \
-  --i-classifier core/its2_db4q2_custom_classifier.qza \
-  --i-reads core/RepSeq.qza \
-  --o-classification core/taxonomy.qza
-
-qiime metadata tabulate \
-  --m-input-file core/taxonomy.qza \
-  --o-visualization core/taxonomy.qzv
-
-qiime tools export \
-  --input-path core/taxonomy.qzv \
-  --output-path /scratch_vol0/fungi/PaleoENV_cluster/05_QIIME2/ITS2/export/taxonomy/db4q2_taxonomy_2025_07_01
-  
+# qiime feature-classifier fit-classifier-naive-bayes \
+#   --i-reference-reads core/ref-seqs.qza \
+#   --i-reference-taxonomy core/ref-taxonomy.qza \
+#   --p-feat-ext--n-features 2048 \
+#   --o-classifier core/its2_db4q2_custom_classifier.qza
+# 
+# qiime feature-classifier classify-sklearn \
+#   --i-classifier core/its2_db4q2_custom_classifier.qza \
+#   --i-reads core/RepSeq.qza \
+#   --o-classification core/taxonomy.qza
+# 
+# qiime metadata tabulate \
+#   --m-input-file core/taxonomy.qza \
+#   --o-visualization core/taxonomy.qzv
+# 
+# qiime tools export \
+#   --input-path core/taxonomy.qzv \
+#   --output-path /scratch_vol0/fungi/PaleoENV_cluster/05_QIIME2/ITS2/export/taxonomy/db4q2_taxonomy_2025_07_01
+#   
 ###############################################################################
 
-##  #   --p-query '(ITS2[ALL] OR Its2[ALL] OR its2[ALL] AND viridiplantae[ORGN] NOT bacteria[ORGN] NOT fungi[ORGN] NOT chloroplast[ALL] NOT mitochondrion[ALL]))' \
-## 
-## qiime rescript get-ncbi-data \
-##     --p-query '(txid33090[ORGN] AND (ITS OR Internal Transcribed Spacer) NOT environmental sample[Title] NOT environmental samples[Title] NOT environmental[Title] NOT uncultured[Title] NOT unclassified[Title] NOT unidentified[Title] NOT unverified[Title])' \
-##     --o-sequences taxonomy/RefTaxo.qza \
-##     --o-taxonomy taxonomy/DataSeq.qza
-## 
-## 
-## qiime feature-classifier classify-consensus-vsearch \
-##     --i-query core/RepSeq.qza  \
-##     --i-reference-reads taxonomy/RefTaxo.qza \
-##     --i-reference-taxonomy taxonomy/DataSeq.qza \
-##     --p-perc-identity 0.8 \
-##     --p-query-cov 0.3 \
-##     --p-top-hits-only \
-##     --p-maxaccepts 5 \
-##     --p-strand 'both' \
-##     --p-unassignable-label 'Unassigned' \
-##     --p-min-consensus 0.7 \
-##     --p-threads 12 \
-##     --o-classification taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch.qza \
-##     --o-search-results taxonomy/search_results_RepSeq_vsearch.qza
-##     
-## qiime feature-classifier classify-consensus-vsearch \
-##     --i-query core/RarRepSeq.qza  \
-##     --i-reference-reads taxonomy/RefTaxo.qza \
-##     --i-reference-taxonomy taxonomy/DataSeq.qza \
-##     --p-perc-identity 0.8 \
-##     --p-query-cov 0.3 \
-##     --p-top-hits-only \
-##     --p-maxaccepts 5 \
-##     --p-strand 'both' \
-##     --p-unassignable-label 'Unassigned' \
-##     --p-min-consensus 0.7 \
-##     --p-threads 12 \
-##     --o-classification taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch.qza \
-##     --o-search-results taxonomy/search_results__RarRepSeq_vsearch.qza
-## 
-##   qiime metadata tabulate \
-##   --m-input-file taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch.qza \
-##   --o-visualization taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch.qzv  
-## 
-##   qiime metadata tabulate \
-##   --m-input-file taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch.qza \
-##   --o-visualization taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch.qzv  
-## 
-##  qiime taxa barplot \
-##   --i-table core/RarTable.qza \
-##   --i-taxonomy taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch.qza \
-##   --m-metadata-file $DATABASE/sample-metadata_ITS2.tsv \
-##   --o-visualization taxonomy/taxa-bar-plots_reads-per-batch_RarRepSeq_vsearch.qzv 
-##   
-##   
-##    qiime taxa barplot \
-##   --i-table core/RarTable.qza \
-##   --i-taxonomy taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch.qza \
-##   --m-metadata-file $DATABASE/sample-metadata_ITS2.tsv \
-##   --o-visualization taxonomy/taxa-bar-plots_reads-per-batch_RepSeq_vsearch.qzv 
-## 
-## qiime tools export --input-path taxonomy/taxa-bar-plots_reads-per-batch_RarRepSeq_vsearch.qzv --output-path export/taxonomy/taxa-bar-plots_reads-per-batch_RarRepSeq_vsearch
-## qiime tools export --input-path taxonomy/taxa-bar-plots_reads-per-batch_RepSeq_vsearch.qzv --output-path export/taxonomy/taxa-bar-plots_reads-per-batch_RepSeq_vsearch
-## qiime tools export --input-path taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch.qzv --output-path export/taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch_visual
-## qiime tools export --input-path taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch.qzv --output-path export/taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch_visual
-## qiime tools export --input-path taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch.qza --output-path export/taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch
-## qiime tools export --input-path taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch.qza --output-path export/taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch
-## qiime tools export --input-path taxonomy/taxonomy_reads-per-batch_RarRepSeq.qza --output-path export/taxonomy/taxonomy_reads-per-batch_RarRepSeq
+ #   --p-query '(ITS2[ALL] OR Its2[ALL] OR its2[ALL] AND viridiplantae[ORGN] NOT bacteria[ORGN] NOT fungi[ORGN] NOT chloroplast[ALL] NOT mitochondrion[ALL]))' \
+
+# txid4479[ORGN] = Poaceae
+
+qiime rescript get-ncbi-data \
+    --p-query '(txid4479[ORGN] AND (ITS OR Internal Transcribed Spacer) NOT environmental sample[Title] NOT environmental samples[Title] NOT environmental[Title] NOT uncultured[Title] NOT unclassified[Title] NOT unidentified[Title] NOT unverified[Title])' \
+    --o-sequences taxonomy/RefTaxo.qza \
+    --o-taxonomy taxonomy/DataSeq.qza
+
+
+qiime feature-classifier classify-consensus-vsearch \
+    --i-query core/RepSeq.qza  \
+    --i-reference-reads taxonomy/RefTaxo.qza \
+    --i-reference-taxonomy taxonomy/DataSeq.qza \
+    --p-perc-identity 0.77 \
+    --p-query-cov 0.3 \
+    --p-top-hits-only \
+    --p-maxaccepts 5 \
+    --p-strand 'both' \
+    --p-unassignable-label 'Unassigned' \
+    --p-min-consensus 0.7 \
+    --p-threads 12 \
+    --o-classification taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch.qza \
+    --o-search-results taxonomy/search_results_RepSeq_vsearch.qza
+    
+qiime feature-classifier classify-consensus-vsearch \
+    --i-query core/RarRepSeq.qza  \
+    --i-reference-reads taxonomy/RefTaxo.qza \
+    --i-reference-taxonomy taxonomy/DataSeq.qza \
+    --p-perc-identity 0.77 \
+    --p-query-cov 0.3 \
+    --p-top-hits-only \
+    --p-maxaccepts 5 \
+    --p-strand 'both' \
+    --p-unassignable-label 'Unassigned' \
+    --p-min-consensus 0.7 \
+    --p-threads 12 \
+    --o-classification taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch.qza \
+    --o-search-results taxonomy/search_results__RarRepSeq_vsearch.qza
+
+  qiime metadata tabulate \
+  --m-input-file taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch.qza \
+  --o-visualization taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch.qzv  
+
+  qiime metadata tabulate \
+  --m-input-file taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch.qza \
+  --o-visualization taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch.qzv  
+
+ qiime taxa barplot \
+  --i-table core/RarTable.qza \
+  --i-taxonomy taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch.qza \
+  --m-metadata-file $DATABASE/sample-metadata_ITS2.tsv \
+  --o-visualization taxonomy/taxa-bar-plots_reads-per-batch_RarRepSeq_vsearch.qzv 
+  
+  
+   qiime taxa barplot \
+  --i-table core/RarTable.qza \
+  --i-taxonomy taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch.qza \
+  --m-metadata-file $DATABASE/sample-metadata_ITS2.tsv \
+  --o-visualization taxonomy/taxa-bar-plots_reads-per-batch_RepSeq_vsearch.qzv 
+
+qiime tools export --input-path taxonomy/taxa-bar-plots_reads-per-batch_RarRepSeq_vsearch.qzv --output-path export/taxonomy/taxa-bar-plots_reads-per-batch_RarRepSeq_vsearch
+qiime tools export --input-path taxonomy/taxa-bar-plots_reads-per-batch_RepSeq_vsearch.qzv --output-path export/taxonomy/taxa-bar-plots_reads-per-batch_RepSeq_vsearch
+qiime tools export --input-path taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch.qzv --output-path export/taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch_visual
+qiime tools export --input-path taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch.qzv --output-path export/taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch_visual
+qiime tools export --input-path taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch.qza --output-path export/taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch
+qiime tools export --input-path taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch.qza --output-path export/taxonomy/taxonomy_reads-per-batch_RepSeq_vsearch
+qiime tools export --input-path taxonomy/taxonomy_reads-per-batch_RarRepSeq.qza --output-path export/taxonomy/taxonomy_reads-per-batch_RarRepSeq
 
